@@ -1,23 +1,25 @@
-# This is a sample plugin.yml
-# For more information refer to http://wiki.bukkit.org/Plugin_YAML
-main: edu.unca.rbruce.Demo.Demo
-name: Demo
+main: edu.unca.ajrobine.FirstPlugIn.FirstPlugIn
+name: FirstPlugIn
 version: ${project.version}
-author: SampleAuthor
+author: AndrewRobinette
 description: ${project.description}
 commands:
-  demo:
-    description: the base for this plugin
-    usage: /<demo> command 
-    permission: demo.*
+  FirstPlugIn:
+    description: the 'root' or 'base of my first plugin.
+    usage: /<FirstPlugIn> command 
+    permission: FirstPlugIn.*
 permissions:
-  demo.*:
-    description: permissions of all demo plugin commands
+  FirstPlugIn.*:
+    description: permissions for the commands in this plugin.
     default: true
     children:
-      demo.message:
-        description: gives permission to set the sample message using the sample command
-      demo.cake:
-        description: give the player a block of cake
-      demo.kick:
-        description: kick the specified player out of the game
+      FirstPlugIn.message:
+        description: allows the user to set a sample message
+      FirstPlugIn.cake:
+        description: give the player some cake
+      FirstPlugIn.kick:
+        description: kicks a player out of the game
+      FirstPlugIn.extrahealth:
+        description: gives a player extra health when they ask for it
+      FirstPlugIn.superspeed:
+        description: allows players to move much faster than normal    
