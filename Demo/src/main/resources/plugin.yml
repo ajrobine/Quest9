@@ -22,4 +22,6 @@ permissions:
       FirstPlugIn.extrahealth:
         description: gives a player extra health when they ask for it
       FirstPlugIn.superspeed:
-        description: allows players to move much faster than normal    
+        description: allows players to move much faster than normal
+      FirstPlugIn.freeexperience:
+        description: allows players to gain 100 points of experience    

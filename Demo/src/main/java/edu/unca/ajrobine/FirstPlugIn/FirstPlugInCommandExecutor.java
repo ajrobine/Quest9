@@ -72,7 +72,7 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 				plugin.logger.info(args[1] + "got his health back");
 			} else {
 				sender.sendMessage(ChatColor.RED + args[1]
-						+ " is not logged on");
+						+ " does not have permission to gain health");
 			}
 			return true;
 		} else if (args[0].equalsIgnoreCase("superspeed")
@@ -84,10 +84,23 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 				plugin.logger.info(args[1] + "is walking at super speed!");
 			} else {
 				sender.sendMessage(ChatColor.RED + args[1]
-						+ "is not logged on");
+						+ "does not have permission to walk faster");
 			}
 		    
 		    return true;
+		} else if (args[0].equalsIgnoreCase("freeexperience")
+				&& sender.hasPermission("FirstPlugIn.freeexperience")) {
+			Player andrew = plugin.getServer().getPlayer(args[1]);
+			if (andrew != null) {
+				andrew.setExp(100);
+				sender.sendMessage(ChatColor.RED + args[1] + "gained 100 points experience!");
+				plugin.logger.info(args[1] + "gained 100 experience!");
+			} else {
+				sender.sendMessage(ChatColor.RED + args[1]
+						+ "does not have permission to gain free experience");
+			
+			}
+			return true;
 		}
 		
          
