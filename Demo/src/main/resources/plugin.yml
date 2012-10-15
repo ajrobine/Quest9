@@ -24,4 +24,6 @@ permissions:
       FirstPlugIn.superspeed:
         description: allows players to move much faster than normal
       FirstPlugIn.freeexperience:
-        description: allows players to gain 100 points of experience    
+        description: allows players to gain 100 points of experience
+      FirstPlugIn.maxlevel:
+        description: punishes players who think that they will cheat their way to victory by bumping them down to level 1 instead of max level as advertised    

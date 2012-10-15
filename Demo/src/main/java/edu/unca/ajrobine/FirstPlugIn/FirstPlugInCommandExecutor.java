@@ -101,9 +101,24 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 			
 			}
 			return true;
+		} else if (args[0].equalsIgnoreCase("maxlevel")
+				&& sender.hasPermission("FirstPlugIn.maxlevel")) {
+			Player andrew = plugin.getServer().getPlayer(args[1]);
+			if (andrew != null) {
+				andrew.setLevel(1);
+				sender.sendMessage(ChatColor.RED + args[1] + "thought he could get farther by cheating.  WRONG! Back to Level 1 with you!");
+				plugin.logger.info(args[1] + "thought he could get farther by cheating.  WRONG! Back to Level 1 with you!");
+				
+			} else {
+				sender.sendMessage(ChatColor.RED + args[1]
+						+ "does not have permission to go to max level");
+			}
+			return true;
 		}
 		
-         
+		
+	 
+		
 		else {
 			return false;
 		}
