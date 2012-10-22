@@ -2,10 +2,17 @@ package edu.unca.ajrobine.FirstPlugIn;
 
 import java.text.MessageFormat;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.TreeType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 /*
@@ -46,4 +53,47 @@ public class FirstPlugInListener implements Listener {
                 entityType.getName(),
                 entityType.getTypeId()));
     }
+    
+    /* This event handler allows the user to create a pine tree
+     * by right-clicking a block.  If there is already a pine tree
+     * there, then the tree is removed and replaced with a new tree. 
+    */ 
+     
+    @EventHandler(priority = EventPriority.LOW)
+    public void pineTreeEvent(PlayerInteractEvent event) {
+    	if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+    		Block b = event.getClickedBlock();
+    		if (b != null) {
+    			Location loc = b.getLocation();
+    			TreeType pine = null;
+    			loc.getWorld().generateTree(loc, pine);
+    			b.setType(Material.WOOD);
+    			event.getPlayer().sendMessage("you planted a tree!");
+    			plugin.logger.info(event.getPlayer() + "planted a tree!");
+    		}
+    	}
+    }
+    
+    /*In the spirit of Halloween, this event handler creates an explosion
+     *with a left click, but leaves a jack-o-lantern floating in midair, occupying the 
+     *space of the block that was clicked.  An eerie sound of thunder
+     *is also triggered, even though it may be sunny and there is no lightning.  Spooky!
+     */
+    
+    @EventHandler(priority = EventPriority.LOW)
+    public void secondEvent(PlayerInteractEvent event) {
+    	if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
+    		Block b = event.getClickedBlock();
+    		if (b != null) {
+    			Location loc = b.getLocation();
+    			loc.getWorld().createExplosion(loc, 10);
+    			b.setType(Material.JACK_O_LANTERN);
+    			loc.getWorld().setThundering(true);
+    			event.getPlayer().sendMessage("you found the headless horseman's head!");
+    			plugin.logger.info(event.getPlayer() + "found the headless horseman's head!");
+    		}
+    	}
+    }
+    
+    
 }
