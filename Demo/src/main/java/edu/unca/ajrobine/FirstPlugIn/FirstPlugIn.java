@@ -1,5 +1,10 @@
 package edu.unca.ajrobine.FirstPlugIn;
 
+import java.util.List;
+
+import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /*
@@ -34,6 +39,21 @@ public class FirstPlugIn extends JavaPlugin {
 	public void onDisable() {
 		logger.info("plugin disabled");
 
+	}
+	
+	public void setMetadata(Player player, String key, Object value, FirstPlugIn plugin) {
+		player.setMetadata(key, new FixedMetadataValue(plugin, value));
+	}
+	
+	public Object getMetadata(Player player, String key, FirstPlugIn plugin) {
+		List<MetadataValue> values = player.getMetadata(key);
+		for (MetadataValue value : values) {
+			if (value.getOwningPlugin().getDescription().getName()
+					.equals(plugin.getDescription().getName())) {
+				return (value.asBoolean());
+			}
+		}
+		return null;
 	}
 
 }

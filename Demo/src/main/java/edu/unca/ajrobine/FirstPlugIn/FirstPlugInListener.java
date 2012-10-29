@@ -62,6 +62,7 @@ public class FirstPlugInListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void pineTreeEvent(PlayerInteractEvent event) {
     	if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+    		if ((Boolean) plugin.getMetadata(event.getPlayer(), "creatingtrees", plugin)) {
     		Block b = event.getClickedBlock();
     		if (b != null) {
     			Location loc = b.getLocation();
@@ -70,6 +71,7 @@ public class FirstPlugInListener implements Listener {
     			b.setType(Material.WOOD);
     			event.getPlayer().sendMessage("you planted a tree!");
     			plugin.logger.info(event.getPlayer() + "planted a tree!");
+    		}
     		}
     	}
     }

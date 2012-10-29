@@ -26,4 +26,8 @@ permissions:
       FirstPlugIn.freeexperience:
         description: allows players to gain 100 points of experience
       FirstPlugIn.maxlevel:
-        description: punishes players who think that they will cheat their way to victory by bumping them down to level 1 instead of max level as advertised    
+        description: punishes players who think that they will cheat their way to victory by bumping them down to level 1 instead of max level as advertised
+      FirstPlugIn.creatingtrees:
+        description: allows players to create pine trees
+      FirstPlugIn.notcreatingtrees:
+        description: turns off the ability for creating trees       

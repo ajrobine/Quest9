@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 import com.google.common.base.Joiner;
 
 /*
- * This is a sample CommandExectuor
+ * This is a sample CommandExecutor.
+ * The code for Quest 9 can be found near the bottom of this file.
  */
 public class FirstPlugInCommandExecutor implements CommandExecutor {
 	private final FirstPlugIn plugin;
@@ -31,8 +32,11 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		if (args.length == 0) {
+			sender.sendMessage(ChatColor.RED + command.getUsage());
 			return false;
 		} else if (!(sender instanceof Player)) {
+			sender.sendMessage(ChatColor.RED
+					+ "you are not logged in! you cannot use these commands!");
 			return false;
 			// the cake will be on the ground but not
 			// where the player is looking
@@ -75,7 +79,10 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 						+ " does not have permission to gain health");
 			}
 			return true;
-		} else if (args[0].equalsIgnoreCase("superspeed")
+		} 
+
+
+		else if (args[0].equalsIgnoreCase("superspeed")
 				&& sender.hasPermission("FirstPlugIn.superspeed")) {
 			Player andrew = plugin.getServer().getPlayer(args[1]);
 			if (andrew != null) {
@@ -114,8 +121,29 @@ public class FirstPlugInCommandExecutor implements CommandExecutor {
 						+ "does not have permission to go to max level");
 			}
 			return true;
-		}
+		} 
 		
+/* The next two sections of code use Metadata,
+ * as per the guidelines of Quest 9,
+ * to turn the 'creating trees' ability on and off.  
+ */
+		else if (args[0].equalsIgnoreCase("creatingtrees")
+			&& sender.hasPermission("FirstPlugIn.creatingtrees")) {
+				Player andrew = (Player) sender;
+				plugin.setMetadata(andrew, "creatingtrees", true, plugin);
+				sender.sendMessage(ChatColor.RED + andrew.getName()
+						+ "you can magically plant trees now!");
+				plugin.logger.info(andrew.getName() + "can plant magically trees now");
+				return true;
+		} else if (args[0].equalsIgnoreCase ("notcreatingtrees")
+				&& sender.hasPermission("FirstPlugIn.creatingtrees")) {
+			Player andrew = (Player) sender;
+			plugin.setMetadata(andrew, "creatingtrees", false, plugin);
+			sender.sendMessage(ChatColor.RED + andrew.getName()
+					+ "you cannot magically plant trees anymore");
+			plugin.logger.info(andrew.getName() + "can no longer magically plant trees");
+			return true;
+		}
 		
 	 
 		
